@@ -49,7 +49,7 @@ module A1 where -- DON"T TOUCH THIS LINE!
 -- p x is the square of x, plus x, plus 1
 p :: Int -> Int
 p x = 
-    (x ^ x) + x + 1
+    (x ^ 2) + x + 1
 
 -- Question 2.
 -- nat_minus x y is x-y unless x-y is negative, in which case it returns 0
@@ -76,7 +76,7 @@ t x y z =
 -- See Question 3.
 l :: (Int, (Int, Int)) -> Int
 l p = 
-    10
+    snd(snd(p))
 
 -- Question 6.
 -- See Question 3.
