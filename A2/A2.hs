@@ -59,7 +59,7 @@ exp x n =
 sumPower :: Int -> Int -> Int
 sumPower n x =
     if n == 0 then 1
-    else (x ^ n) + sumPower x (n - 1)
+    else exp x n + sumPower x (n - 1)
 
 -- lte x y iff x <= y (i.e. x is less than or equal to y)
 -- Note. Recall that you can assume x and y are always nonnegative.
@@ -77,20 +77,22 @@ quotient :: Int -> Int -> Int
 quotient x y =
     undefined
 
+
 -- remainder x y is a number k such that k < y and x-k is divisible by y.
 -- E.g. remainder 13 5 = 3.
 -- Assume y > 0.
 remainder :: Int -> Int -> Int
 remainder x y =
-    if 
+    undefined
 
 -- loopyFact n 1 = 1 * 2 * ... * n
 -- This is an odd specification since it only specifies what happens
 -- if the second argument is 1. This means you can do what you want
 -- in the other cases.
 loopyFact :: Int -> Int -> Int
+loopyFact n 1 = fact n
 loopyFact n v = 
-    undefined
+    10
 
 -- for testing iterfun below
 s :: Int -> Int
@@ -104,7 +106,8 @@ s n = n + 1
 -- like any other function.
 iterfun :: (Int -> Int) -> Int -> Int -> Int
 iterfun f n x =
-    undefined
+    if n == 0 then x
+    else s (iterfun s (n - 1) x)
 
 
 
