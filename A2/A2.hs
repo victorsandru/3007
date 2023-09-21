@@ -57,7 +57,7 @@ exp x n =
 
 -- sum_power x n = x^0 + x^1 + ... + x^n
 sumPower :: Int -> Int -> Int
-sumPower n x =
+sumPower x n =
     if n == 0 then 1
     else exp x n + sumPower x (n - 1)
 
