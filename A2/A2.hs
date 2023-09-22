@@ -75,7 +75,9 @@ lte x y =
 -- Assume y > 0.
 quotient :: Int -> Int -> Int
 quotient x y =
-    undefined
+    if x == y then 1
+    else if lte x y == True then 0
+    else 1 + quotient (x - y) y
 
 
 -- remainder x y is a number k such that k < y and x-k is divisible by y.
@@ -83,7 +85,9 @@ quotient x y =
 -- Assume y > 0.
 remainder :: Int -> Int -> Int
 remainder x y =
-    undefined
+    if x == y then 1
+    else if lte x y == True then 1
+    else remainder (x - y) y
 
 -- loopyFact n 1 = 1 * 2 * ... * n
 -- This is an odd specification since it only specifies what happens
