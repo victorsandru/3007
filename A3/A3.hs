@@ -156,9 +156,12 @@ applyElse (Add k v rest) x d =
 -- (update x y m) is a map m' such that
 -- apply m' x ==> y
 -- apply m' z ==> apply m z   if z is different than x
-update :: Eq a => a -> b -> Map a b -> Map a b 
-update x y (Add k v rest) =
-    undefined
+update :: Eq a => a -> b -> Map a b -> Map a b
+update _ _ Empty = Empty 
+update key nValue (Add k v rest) =
+    if k == k then Add key nValue rest
+    else Add k v (update key nValue rest)
+
 -- (deleteGoody gs n) is the same as gs except the element at position n is
 -- replaced by Nothing. Note: the first element of a list is at postion 0.
 deleteGoody :: [Maybe Goody] -> Int -> [Maybe Goody]
