@@ -177,8 +177,8 @@ stowGoody [] _ _ = [Nothing]
 stowGoody (g:gs) n bp =
     if n == 0 then
         if g == Nothing then Nothing
-        else 
-
+        else bp
+    else bp
 -- (transition poke state) is the state resulting from moving the wombat to a new
 -- position and collecting the goody there, if any. "Collecting the goody"
 -- involves updating the path to show the goody is gone, and updating the
