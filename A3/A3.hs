@@ -151,7 +151,7 @@ applyElse :: Eq a => Map a b -> a -> b -> b
 applyElse Empty _ d = d
 applyElse (Add k v rest) x d =
     if k == x then v
-    else applyElse rest k d
+    else applyElse rest x d
 
 -- (update x y m) is a map m' such that
 -- apply m' x ==> y
@@ -159,18 +159,25 @@ applyElse (Add k v rest) x d =
 update :: Eq a => a -> b -> Map a b -> Map a b
 update _ _ Empty = Empty 
 update key nValue (Add k v rest) =
-    if k == k then Add key nValue rest
+    if k == key then Add key nValue rest
     else Add k v (update key nValue rest)
 
 -- (deleteGoody gs n) is the same as gs except the element at position n is
 -- replaced by Nothing. Note: the first element of a list is at postion 0.
 deleteGoody :: [Maybe Goody] -> Int -> [Maybe Goody]
-deleteGoody = undefined
+deleteGoody [] _ = [Nothing]
+deleteGoody (g:gs) n = 
+    if n == 0 then gs
+    else g : deleteGoody gs (n - 1)
 
 -- (stowGoody gs n bp) is bp if the goody at position n in gs is Nothing, else it
 -- is bp with the value of the corresponding key in bp incremented by 1.
 stowGoody :: [Maybe Goody] -> Int -> Backpack -> Backpack
-stowGoody = undefined
+stowGoody [] _ _ = [Nothing]
+stowGoody (g:gs) n bp =
+    if n == 0 then
+        if g == Nothing then Nothing
+        else 
 
 -- (transition poke state) is the state resulting from moving the wombat to a new
 -- position and collecting the goody there, if any. "Collecting the goody"
