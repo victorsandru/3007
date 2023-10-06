@@ -157,7 +157,8 @@ applyElse (Add k v rest) x d =
 -- apply m' x ==> y
 -- apply m' z ==> apply m z   if z is different than x
 update :: Eq a => a -> b -> Map a b -> Map a b
-update _ _ Empty = Empty 
+update k v Empty = 
+    Add k v Empty
 update key nValue (Add k v rest) =
     if k == key then Add key nValue rest
     else Add k v (update key nValue rest)
