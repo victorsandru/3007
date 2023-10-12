@@ -174,14 +174,12 @@ deleteGoody (g:gs) n =
 -- (stowGoody gs n bp) is bp if the goody at position n in gs is Nothing, else it
 -- is bp with the value of the corresponding key in bp incremented by 1.
 stowGoody :: [Maybe Goody] -> Int -> Backpack -> Backpack
-stowGoody = undefined
 -- stowGoody [] _ _ = [Nothing]
--- stowGoody (g:gs) n bp =
---     undefined
-    -- if n == 0 then
-    --     if g == Nothing then Nothing
-    --     else bp
-    -- else bp
+stowGoody (g:gs) n bp =
+    if n == 0 then
+        if g == Nothing then Nothing
+        else bp
+    else bp
 
 -- (transition poke state) is the state resulting from moving the wombat to a new
 -- position and collecting the goody there, if any. "Collecting the goody"
