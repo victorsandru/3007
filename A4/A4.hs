@@ -132,25 +132,40 @@ profCourseRatings ratings name course =
 
 -- List of all courses taught be a particular prof. No duplicates (use nub).
 profCourses :: [Rating] -> Name -> [Course]
-profCourses ratings name =
-    undefined
-    -- filter (\rating -> ratingCourse rating == name) (filter (\rating -> ratingProf rating == name) ratings)
+profCourses ratings name = 
+    let
+        filteredRatings = filter(\rating -> ratingProf rating == name) ratings
+        courseNames = map ratingCourse filteredRatings
+        uniqueCourses = nub courseNames
+    in 
+        uniqueCourses
 
 -- The average score received by a prof for a particular course.
 profCourseAvg :: [Rating] -> Name -> Course -> Int
-profCourseAvg = undefined
+profCourseAvg ratings name course = 
+    let
+        filteredRatings = filter (\rating -> ratingProf rating == name && ratingCourse rating == course) ratings
+        scores = map ratingScore filteredRatings
+    in
+        average scores
 
 -- A mapping, represented as an association list, where the keys are the courses
 -- taught by the given prof and the values are the average student score for that
 -- course.
 profCourseAvgs :: [Rating] -> Name -> [(Course,Int)]
-profCourseAvgs = undefined
+profCourseAvgs ratings name = 
+    let
+        courses = nub $ map ratingCourse $ filter (\rating -> ratingProf rating == name) ratings
+    in
+        map (\courseName -> (courseName, profCourseAvg ratings name courseName)) courses
+    -- undefined
+    
 
 -- The average score for courses taught by the prof. Note: this is the average
 -- of the course averages, not the average over all ratings received by the
 -- prof.
 profAvg :: [Rating] -> Name -> Int
-profAvg = undefined
+profAvg ratings name = undefined
 
 -- A mapping giving the average score for each prof
 allProfAvgs :: [Rating] -> [(Name, Int)]
@@ -159,7 +174,12 @@ allProfAvgs = undefined
 -- The average score given by a student.
 studentAvg :: [Rating] -> Name -> Int
 studentAvg ratings name = 
-    undefined
+    let
+        filteredRatings = filter (\rating -> ratingStudent rating == name) ratings
+        scores = map ratingScore filteredRatings
+    in
+        average scores
+
 -- The average of all student averages.
 avgStudentAvg :: [Rating] -> Int    
 avgStudentAvg = undefined
