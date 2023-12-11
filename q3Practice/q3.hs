@@ -62,6 +62,6 @@ stringtoList :: Int -> [Char]
 stringtoList s = show s
 
 
-fullWords :: Integer -> String
-fullWords n = concat map (\d -> digitToIntChar d ++ "-") stringtoList n
-  where digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+-- fullWords :: Integer -> String
+-- fullWords n = concat map (\d -> digitToIntChar d ++ "-") stringtoList n
+--   where digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
